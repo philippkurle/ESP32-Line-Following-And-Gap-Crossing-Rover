@@ -8,12 +8,12 @@ The rover uses an ESP32 to read two brightness sensors through analog to digital
 
 The straight-crossing logic:
 
-[![Straight crossing demo](docs/images/)]
+[![Straight crossing demo](docs/images/straight_crossing_thumbnail.png)]
 (docs/videos/rover_straight_crossing.mp4)
 
 The curved-crossing logic:
 
-[![Curved crossing demo](docs/images/)]
+[![Curved crossing demo](docs/images/curved_crossing_thumbnail.png)]
 (docs/videos/rover_curve_crossing2.mp4)
 
 If crossing the gap takes too long, the rover identifies it as the biggest gap on the track and stores this information within a counter. When the counter reaches 2, the rover uses this gap to leave the track.
