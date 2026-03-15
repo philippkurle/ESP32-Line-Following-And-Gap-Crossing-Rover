@@ -105,7 +105,7 @@ while True:
                 if last_white_detected == 0:
                     last_white_detected = ticks_ms()
                 if not in_gap and ticks_diff(ticks_ms(), last_white_detected) > 50:
-                    gap_start_time = ticks_ms()                                # meassures gap time
+                    gap_start_time = ticks_ms()                                # measures gap time
                     in_gap = True
                     gap_counted_already = False
                     uart.send("Gap found\n") 
@@ -120,7 +120,7 @@ while True:
                             print("That's the exit gap. Encounter number:", gap_counter)
                             uart.send("That's the exit gap. Encounter number: " + str(gap_counter)  + "\n")
 
-                            # Rover leaves through exit gap while second crossing
+                            # rover leaves through exit gap during second crossing
                             if gap_counter >= 2:
                                 print("EXIT SEQUENCE")
                                 uart.send("EXIT SEQUENCE\n")
@@ -133,7 +133,7 @@ while True:
                                 motors_obj.drive_straight(0, 0)     # motors off
                                 print("Finished")
                                 uart.send("Finished\n")
-                                while True:                         # Rover sleep till reset
+                                while True:                         # rover sleep until reset
                                     sleep(0.1)
 
                     motors_obj.drive_straight(PWM_SPEED, 0.01)
