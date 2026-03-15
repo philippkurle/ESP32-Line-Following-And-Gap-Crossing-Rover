@@ -54,8 +54,8 @@ while True:
     if start_button.value():     # start
         sleep(0.1)
 
-        print("Rover wird initialisiert.")
-        uart.send("Rover wird initialisiert.\n")
+        print("Rover initialises")
+        uart.send("Rover initialises\n")
 
         # reset all variables at the beginning
         bias_start_time = ticks_ms()
