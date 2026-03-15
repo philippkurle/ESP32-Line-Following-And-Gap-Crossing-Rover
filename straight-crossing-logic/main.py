@@ -108,7 +108,7 @@ while True:
                     gap_start_time = ticks_ms()                                # meassures gap time
                     in_gap = True
                     gap_counted_already = False
-                    uart.send("gap found.\n") 
+                    uart.send("Gap found\n") 
                 if in_gap:        
                     gap_duration = ticks_diff(ticks_ms(), gap_start_time)      # time needed to cross gap
 
@@ -131,8 +131,8 @@ while True:
                                     motors_obj.turn_left(85, 0.01)  # Strong left
                                 sleep(1.0)                                  
                                 motors_obj.drive_straight(0, 0)     # motors off
-                                print("Fertig.")
-                                uart.send("Fertig\n")
+                                print("Finished")
+                                uart.send("Finished\n")
                                 while True:                         # Rover sleep till reset
                                     sleep(0.1)
 
