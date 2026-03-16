@@ -1,21 +1,45 @@
-# Line following and gap crossing rover
+# Line-Following and Gap-Crossing Rover
 
-This repository contains the main decision making logic I developed for a group project I took part in for university. It enabled the rover to stay on the black line and cross gaps within the track.
+This repository contains the rover control logic I developed for a university group project. My contribution focused on implementing the decision-making logic for line following and gap crossing on an ESP32-based rover.
 
-All necessary code to establish a bluetooth connection, initialise the pins on the ESP32 and the motor functions were provided for.
+## Overview
 
-The rover uses an ESP32 to read two brightness sensors through analog to digital signal conversion. By testing the digital sensor values several times, a stable value for black was found and used as a threshold, on which a line-following logic was implemented: if both sensors detect black, the rover drives straight, and if one sensor detects white, it corrects its path with a curve.
+The rover follows a black line and is able to cross gaps in the track. To achieve this, it reads two brightness sensors via analog-to-digital conversion and use threshold-based logic to distinguish between black and white surfaces.
 
-The straight-crossing logic:
+## Existing Framework
 
-[![Straight crossing demo](docs/images/straight_crossing_thumbnail.png)](https://github.com/user-attachments/assets/fbd1173c-5b01-44a4-aa4f-7305391d7ac3)
+The code required to establish a Bluetooth connection, initialise the ESP32 pins, and control the motors was already provided. my work focused on the rover's navigation and decision-making behaviour.
 
-The curved-crossing logic:
+## Line-Following Logic
+
+After testing the sensor readings multiple times, a stable threshold for detecting black was determined. Based on this threshold, the following control logic was implemented:
+
+- If both sensors detect black, the rover drives straight. 
+- If one sensor detects white, the rover corrects its path by steering in a curve.
+
+## Gap-Crossing Logic
+
+I developed and tested two different gap-crossing strategies:
+
+### Curved crossing
+Some gaps were located on shorter track sections with slight curvature. In these cases, the rover could not reliably cross in a straigth line and failed to re-enter the track correctly. To solve this, I implemented a curved crossing strategy: the rover begins crossing with a curved trajectory and, if the track is not detected again, switches to the opposite trajectory.
 
 [![Curved crossing demo](docs/images/curved_crossing_thumbnail.png)](https://github.com/user-attachments/assets/b32d4a72-7c75-41c8-95c8-d1e1f8f249d9)
 
-If crossing the gap takes too long, the rover identifies it as the biggest gap on the track and stores this information within a counter. When the counter reaches 2, the rover uses this gap to leave the track.
-During the first 3.5 seconds, it counts left and right corrections to determine a global bias, which lets the rover know the direction in which the track is driven. This bias is later used to decide in which direction the rover exits the track. After the exit process through the largest gap is concluded, the rover stays in an infinite sleep loop and must be restarted manually.
+### Straight crossing
+For tracks without curved sections, I developed a second version using straight gap crossing. This version was used in the final test.
 
-The connection between rover and smartphone was established via the Bluefruit Connect app, which provided a chat to read all outgoing messages and notifications.
+[![Straight crossing demo](docs/images/straight_crossing_thumbnail.png)](https://github.com/user-attachments/assets/fbd1173c-5b01-44a4-aa4f-7305391d7ac3)
+
+## Additional logic
+
+If crossing a gap takes too long, the rover classifies it as the largest gap on the track and increments a counter. Once this counter reaches 2, the rover uses that gap as the designated exit point.
+
+During the first 3.5 seconds of operation, the rover counts left and right corrections to determine a directional bias, allowing the rover to infer the track's overall direction. This bias is then used to decide the direction in which the rover begins crossing a gap in the curved-crossing version, as well as the direction in which it exits the track in both versions. 
+
+After leaving the track through the largest gap, the rover enters an infinite sleep loop and must be restarted manually.
+
+## Communication
+
+The rover communicates with a smartphone via Bluefruit Connect app, which provides a chat interface for reading outgoing messages and notifications.
 
