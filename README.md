@@ -8,7 +8,7 @@ The rover uses an ESP32 to read two brightness sensors through analog to digital
 
 The straight-crossing logic:
 
-[![Straight crossing demo](docs/images/straight_crossing_thumbnail.png)](docs/videos/rover_straight_crossing.mp4)
+[![Straight crossing demo](docs/images/straight_crossing_thumbnail.png)](https://github.com/user-attachments/assets/fbd1173c-5b01-44a4-aa4f-7305391d7ac3)
 
 The curved-crossing logic:
 
