@@ -14,7 +14,7 @@ The rover follows a black line and is able to cross gaps in the track. To achiev
 - Bluetooth communication
 - Bluefruit Connect
 
-## Existing Framework
+## My Contribution
 
 The code required to establish a Bluetooth connection, initialise the ESP32 pins, and control the motors was already provided. My work focused on the rover's navigation and decision-making behaviour.
 
