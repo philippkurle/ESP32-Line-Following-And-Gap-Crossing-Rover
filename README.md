@@ -61,5 +61,5 @@ The rover communicates with a smartphone via the Bluefruit Connect app, which pr
 - `straight-crossing-logic/` – rover navigation and control logic for tracks with straight gaps only
 - `docs/images/` – thumbnails used in the README and additional images
 
-## Challenges and Lessons Learnt
+
 
