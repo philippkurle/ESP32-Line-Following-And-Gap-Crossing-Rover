@@ -6,13 +6,13 @@ This repository contains the rover control logic I developed for a university gr
 
 The rover follows a black line and is able to cross gaps in the track. To achieve this, it reads two brightness sensors via analogue-to-digital conversion and uses threshold-based logic to distinguish between black and white surfaces.
 
-## Technologies Used
+## System Interface and Technologies Used
 
 - ESP32
 - Python
 - Analogue brightness sensors
-- Bluetooth communication
-- Bluefruit Connect
+- Bluetooth connection
+- Bluefruit Connect smartphone app for status messages and notifications
 
 ## My Contribution
 
@@ -50,10 +50,6 @@ If crossing a gap takes too long, the rover assumes it has reached the largest g
 During the first 3.5 seconds of operation, the rover counts left and right corrections to determine a directional bias, allowing the rover to infer the track's overall direction. This bias is then used to decide the direction in which the rover begins crossing a gap in the curved-crossing version, as well as the direction in which it exits the track in both versions. 
 
 After leaving the track through the largest gap, the rover stops and must be restarted manually.
-
-## Communication
-
-The rover communicates with a smartphone via the Bluefruit Connect app, which provides a chat interface for reading outgoing messages and notifications.
 
 ## Repository Structure
 
