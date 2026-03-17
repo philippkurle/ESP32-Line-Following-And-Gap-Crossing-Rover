@@ -20,21 +20,21 @@ The code required to establish a Bluetooth connection, initialise the ESP32 pins
 
 ## Control Concept
 
-The rover continuously reads two brightness sensors, compares the radings against a calibrated threshold, and selects motor commands based on a rule-based decision system. Additional logic handles gap detection, directional bias estimation, and track exit behaviour.
+The rover continuously reads two brightness sensors, compares the readings against a calibrated threshold, and selects motor commands based on a rule-based decision system. Additional logic handles gap detection, directional bias estimation, and track exit behaviour.
 
 ## Line-Following Logic
 
 After testing the sensor readings multiple times, a stable threshold for detecting black was determined. Based on this threshold, the following control logic was implemented:
 
 - If both sensors detect black, the rover drives straight. 
-- If one sensor detects white, the rover corrects its path by steering along a curved trajectory.
+- If one sensor detects white, the rover corrects its path by following a curved trajectory.
 
 ## Gap-Crossing Logic
 
 I developed and tested two different gap-crossing strategies:
 
 ### Curved crossing
-Some gaps were located on shorter track sections with slight curvature. In these cases, the rover could not reliably cross in a straight line and failed to re-enter the track correctly. To solve this, I implemented a curved crossing strategy: the rover begins crossing with a curved trajectory and, if the track is not detected again, switches to the opposite trajectory.
+Some gaps were located on shorter track sections with slight curvature. In these cases, the rover could not reliably cross in a straight line and failed to re-enter the track correctly. To solve this, I implemented a curved crossing strategy: the rover begins the crossing on a curved trajectory and, if the track is not detected again, switches to the opposite trajectory.
 
 [![Curved crossing demo](docs/images/curved_crossing_thumbnail.png)](https://github.com/user-attachments/assets/b32d4a72-7c75-41c8-95c8-d1e1f8f249d9)
 
@@ -58,8 +58,8 @@ The rover communicates with a smartphone via the Bluefruit Connect app, which pr
 ## Repository Structure
 
 - `curved-crossing-logic/` – rover navigation and control logic for curved gaps
-- `straight-crossing-logic/` – rover navigation and control logic for straight gaps exclusively
+- `straight-crossing-logic/` – rover navigation and control logic for tracks with straight gaps only
 - `docs/images/` – thumbnails used in the README and additional images
 
-## Challenges and Lessons learned
+## Challenges and Lessons Learnt
 
