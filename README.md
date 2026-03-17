@@ -9,10 +9,11 @@ The rover follows a black line and is able to cross gaps in the track. To achiev
 ## System Interface and Technologies Used
 
 - ESP32
-- Python
+- MicroPython
 - Analogue brightness sensors
 - Bluetooth connection
 - Bluefruit Connect smartphone app for status messages and notifications
+- Pymakr for uploading and interacting with the rover code
 
 ## My Contribution
 
