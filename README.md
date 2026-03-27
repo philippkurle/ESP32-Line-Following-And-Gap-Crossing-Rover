@@ -4,7 +4,7 @@ This repository contains the rover control logic I developed for a university gr
 
 ## Overview
 
-The rover follows a black line and is able to cross gaps in the track. To achieve this, it reads two brightness sensors via analogue-to-digital conversion and uses threshold-based logic to distinguish between black and white surfaces.
+The rover follows a black line and crosses potential gaps in the track. In order to achieve this, it reads two brightness sensors via analogue-to-digital conversion and uses threshold-based logic to distinguish between black and white surfaces.
 
 ## System Interface and Technologies
 
@@ -35,7 +35,7 @@ After testing the sensor readings multiple times, a stable threshold for detecti
 I developed and tested two different gap-crossing strategies:
 
 ### Curved crossing
-Some gaps were located on shorter track sections with slight curvature. In these cases, the rover could not reliably cross in a straight line and failed to re-enter the track correctly. To solve this, I implemented a curved crossing strategy: the rover begins the crossing on a curved trajectory and, if the track is not detected again, switches to the opposite trajectory.
+Some gaps were located on shorter track sections with slight curvature. In these cases, the rover could not reliably cross in a straight line and failed to re-enter the track correctly. I therefore implemented a curved crossing strategy, where the rover begins the crossing on a curved trajectory and switches to the opposite trajectory, if the track is not detected again.
 
 [![Curved crossing demo](docs/images/curved_crossing_thumbnail.png)](https://github.com/user-attachments/assets/b32d4a72-7c75-41c8-95c8-d1e1f8f249d9)
 
@@ -48,17 +48,17 @@ For tracks without curved sections, I developed a second version using straight 
 
 If crossing a gap takes too long, the rover assumes it has reached the largest gap on the track and increments a counter. Once this counter reaches 2, the rover uses that gap as the designated exit point.
 
-During the first 3.5 seconds of operation, the rover counts left and right corrections to determine a directional bias, allowing it to infer the track's overall direction. In the curved-crossing version, this bias is used to decide the direction in which the rover begins crossing a gap. In both versions, it is also used to determine the direction in which the rover exits the track.
+During the first 3.5 seconds of operation, the rover counts left and right corrections to determine a directional bias, allowing it to infer the track's overall direction. In the curved-crossing version, this bias is used to decide the direction in which the rover begins crossing a gap. It is also used to determine the direction in which the rover exits the track in both versions
 
-After leaving the track through the largest gap, the rover stops and must be restarted manually.
+The rover stops and must be restarted manually, after leaving the track through the largest gap.
 
 ## Repository Structure
 
 - `curved-crossing-logic/` – rover navigation and control logic for curved gaps
 - `straight-crossing-logic/` – rover navigation and control logic for tracks with straight gaps only
-- `docs/images/` – thumbnails used in the README and additional images
+- `docs/images/` – the thumbnails used in the README and additional images
 
-## Challenges and Lessons Learnt
+## Challenges and Main Lessons
 
 One of the main challenges was that the rover behaved reliably during basic line following, but gap crossing introduced a new source of instability. When entering a gap with poor alignment, the rover could drift away from the track, especially if the gap was longer. This showed that successful gap crossing depended not only on detecting the track correctly, but also on the rover's orientation at the moment it left the line.
 
