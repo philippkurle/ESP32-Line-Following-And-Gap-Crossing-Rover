@@ -4,24 +4,24 @@ This repository contains the rover control logic I developed for a university gr
 
 ## Overview
 
-The rover follows a black line and crosses potential gaps in the track. In order to achieve this, it reads two brightness sensors via analogue-to-digital conversion and uses threshold-based logic to distinguish between black and white surfaces.
+The rover follows a black line and crosses potential gaps in the track. In order to achieve this, it reads two brightness sensors via analog-to-digital conversion and uses threshold-based logic to distinguish between black and white surfaces.
 
 ## System Interface and Technologies
 
 - ESP32
 - MicroPython
-- Analogue brightness sensors
+- Analog brightness sensors
 - Bluetooth communication
 - Bluefruit Connect smartphone app for status messages and notifications
 - Pymakr for uploading and interacting with the rover code
 
 ## My Contribution
 
-The code required to establish a Bluetooth connection, initialise the ESP32 pins, and control the motors was already provided. My work focused on the rover's navigation and decision-making behaviour.
+The code required to establish a Bluetooth connection, initialize the ESP32 pins, and control the motors was already provided. My work focused on the rover's navigation and decision-making behavior.
 
 ## Control Concept
 
-The rover continuously reads two brightness sensors, compares the readings against a calibrated threshold, and selects motor commands based on a rule-based decision system. Additional logic handles gap detection, directional bias estimation, and track exit behaviour.
+The rover continuously reads two brightness sensors, compares the readings against a calibrated threshold, and selects motor commands based on a rule-based decision system. Additional logic handles gap detection, directional bias estimation, and track exit behavior.
 
 ## Line-Following Logic
 
@@ -40,7 +40,7 @@ Some gaps were located on shorter track sections with slight curvature. In these
 [![Curved crossing demo](docs/images/curved_crossing_thumbnail.png)](https://github.com/user-attachments/assets/b32d4a72-7c75-41c8-95c8-d1e1f8f249d9)
 
 ### Straight crossing
-For tracks without curved sections, I developed a second version using straight gap crossing. This version was used in the final test.
+For tracks without curved sections, I developed a second version using straight gap crossing. This version was then used in the final test.
 
 [![Straight crossing demo](docs/images/straight_crossing_thumbnail.png)](https://github.com/user-attachments/assets/fbd1173c-5b01-44a4-aa4f-7305391d7ac3)
 
@@ -68,6 +68,6 @@ To improve performance in curved sections, I developed "soft" curve functions, w
 
 However, this also revealed an important trade-off: logic that worked well for curved gaps could reduce performance on long straight gaps. In the curved-crossing approach, the rover began gap crossings with a curved trajectory, which made straight-gap recovery less reliable. Several attempts were made to distinguish straight and curved gaps earlier, but these approaches did not produce consistent results.
 
-The final solution was to make the crossing behaviour more adaptive. In the curved-crossing version, the rover begins with a curved trajectory based on the inferred track direction. If the line is not detected again within a certain time, the rover switches to a counter-curve to recover the track. In addition, timing-based logic using `ticks_ms()` and `ticks_diff()` was used to identify the largest gap based on crossing duration and treat it as the designated exit point on the second crossing.
+The final solution was to make the crossing behavior more adaptive. In the curved-crossing version, the rover begins with a curved trajectory based on the inferred track direction. If the line is not detected again within a certain time, the rover switches to a counter-curve to recover the track. In addition, timing-based logic using `ticks_ms()` and `ticks_diff()` was used to identify the largest gap based on crossing duration and treat it as the designated exit point on the second crossing.
 
-A key lesson from the project was that robust behaviour could not be achieved with a single idealised control rule. The rover's performance depended heavily on track geometry, timing, and alignment, so the control logic had to be developed iteratively and adapted to the expected course layout. This also led to the decision to keep a separate straight-crossing version, which proved to be the safer choice for the final test because the track only contained straight gaps.
+A key lesson from the project was that robust behavior could not be achieved with a single idealized control rule. The rover's performance depended heavily on track geometry, timing, and alignment, so the control logic had to be developed iteratively and adapted to the expected course layout. This also led to the decision to keep a separate straight-crossing version, which proved to be the safer choice for the final test because the track only contained straight gaps.
