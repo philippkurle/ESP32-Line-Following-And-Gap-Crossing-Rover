@@ -55,8 +55,8 @@ while True:
     if start_button.value():     # start
         sleep(0.1)
 
-        print("Rover initialises")
-        uart.send("Rover initialises\n")
+        print("Rover initializes")
+        uart.send("Rover initializes\n")
 
         # reset all variables at the beginning
         bias_start_time = ticks_ms()
@@ -113,7 +113,7 @@ while True:
                 if in_gap:         
                     gap_duration = ticks_diff(ticks_ms(), gap_start_time)          # time to cross gap
 
-                # recognise the large gap
+                # recognize the large gap
                 if bias_completed and not gap_counted_already:
                     if gap_duration > MIN_GAP_DURATION_TO_COUNT:               
                         gap_counter += 1                                       
